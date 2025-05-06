@@ -10,7 +10,16 @@ const commitMsg = fs.readFileSync(msgPath, 'utf8').trim();
 
 const typePattern = `^(${allowedTypes.join('|')}): .+`;
 const regex = new RegExp(typePattern);
-const timestamp = new Date().toISOString();
+const timestamp = new Date().toLocaleString('en-US', {
+  weekday: 'short',
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+  hour: '2-digit',
+  minute: '2-digit',
+  second: '2-digit',
+  hour12: false,
+});
 
 if (!regex.test(commitMsg)) {
   console.error(
